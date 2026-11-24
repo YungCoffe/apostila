@@ -4,6 +4,7 @@ const { Client, GatewayIntentBits, Events, PermissionFlagsBits } = require('disc
 const { readCatalog } = require('./catalog');
 const { makeHandler } = require('./handlers');
 const { getPort, startHttpServer } = require('./http-server');
+const { registerPanelCommand } = require('./auto-register');
 
 async function main() {
   if (!process.env.DISCORD_TOKEN) { console.error('DISCORD_TOKEN não configurado.'); process.exit(1); }
@@ -19,7 +20,13 @@ async function main() {
     process.exit(1);
   }
   const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-  client.once(Events.ClientReady, ready => console.log(`Conectado como ${ready.user.tag}.`));
+  client.once(Events.ClientReady, ready => {
+    console.log(`Conectado como ${ready.user.tag}.`);
+    registerPanelCommand(ready).then(result => {
+      if (result === 'conflito') console.error('Comando /apostilas já existe com configurações diferentes; não foi alterado.');
+      else console.log(result === 'criado' ? 'Comando global /apostilas registrado; pode demorar a aparecer.' : 'Comando global /apostilas já registrado.');
+    }).catch(() => console.error('Não foi possível confirmar o registro de /apostilas no Discord.'));
+  });
   client.on(Events.InteractionCreate, makeHandler({ readCatalog, adminBit: PermissionFlagsBits.Administrator }));
   client.login(process.env.DISCORD_TOKEN).catch(() => { console.error('Não foi possível conectar ao Discord. Confira as credenciais e a rede.'); process.exit(1); });
 }
