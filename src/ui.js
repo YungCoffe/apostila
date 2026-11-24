@@ -10,14 +10,9 @@ const select = (id, placeholder, options) => ({
 
 function panel() {
   return {
-    embeds: [{ color: COLOR, title: '📚 Central de Apostilas',
-      description: 'Bem-vindo(a)! Escolha sua série ou um volume do **SP em Ação** nos menus abaixo.\n\nOs arquivos disponíveis serão enviados só para você, com a marca **VyxUtils**.',
-      fields: [
-        { name: '🎓 Apostilas por série', value: 'Do 6º ano à 3ª série do Ensino Médio.' },
-        { name: '📖 SP em Ação', value: 'Português e Matemática • volumes 1, 2 e 3.' },
-      ], image: { url: 'attachment://banner.png' }, footer: { text: 'VyxUtils • Seus estudos em um só lugar' } }],
-    files: [{ attachment: require('node:path').join(__dirname, '..', 'assets', 'banner.png'), name: 'banner.png' }],
-    components: [select(IDS.grades, '🎓 Escolha sua série', GRADES), select(IDS.action, '📖 Escolha um volume do SP em Ação', ACTION)],
+    embeds: [{ color: 0x2b2d31, title: '📄 Apostilas',
+      description: 'Escolha sua apostila abaixo.' }],
+    components: [select(IDS.grades, 'Apostilas por série', GRADES), select(IDS.action, 'SP em Ação', ACTION)],
     allowedMentions: { parse: [] },
   };
 }

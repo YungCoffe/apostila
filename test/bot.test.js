@@ -60,11 +60,15 @@ test('as 13 seleções sem links continuam indisponíveis', () => {
     assert.equal(p.flags,64); assert.equal(p.components,undefined); assert.match(p.embeds[0].description,/não estão disponíveis/);
   }
 });
-test('painel e banner têm formato aceito pelos builders do discord.js instalado', () => {
+test('painel clean preserva os dois menus e tem formato aceito pelo discord.js', () => {
   const p = panel(); assert.equal(p.components.length,2);
-  assert.equal(p.components[0].components[0].options.length,7); assert.equal(p.components[1].components[0].options.length,6);
-  assert.equal(p.files[0].name,'banner.png'); assert.ok(fs.statSync(p.files[0].attachment).size > 0);
-  assert.equal(p.embeds[0].image.url,'attachment://banner.png');
+  assert.equal(p.embeds[0].title,'📄 Apostilas');
+  assert.equal(p.embeds[0].description,'Escolha sua apostila abaixo.');
+  assert.equal(p.files,undefined); assert.equal(p.embeds[0].image,undefined);
+  assert.equal(p.components[0].components[0].custom_id,IDS.grades);
+  assert.equal(p.components[1].components[0].custom_id,IDS.action);
+  assert.deepEqual(p.components[0].components[0].options.map(o => o.value), GRADES.map(([id]) => id));
+  assert.deepEqual(p.components[1].components[0].options.map(o => o.value), ACTION.map(([id]) => id));
   assert.doesNotThrow(()=>new EmbedBuilder(p.embeds[0]).toJSON());
   for (const row of p.components) assert.doesNotThrow(()=>ActionRowBuilder.from(row).toJSON());
 });
