@@ -1,5 +1,6 @@
 'use strict';
 const { GRADES, ACTION, getGroup, validFile } = require('./catalog');
+const path = require('node:path');
 
 const COLOR = 0x8a2be2;
 const IDS = { grades: 'apostila:grades:v1', action: 'apostila:sp:v1' };
@@ -13,7 +14,8 @@ const select = (id, placeholder, options) => ({
 function panel() {
   return {
     embeds: [{ color: 0x2b2d31, title: '📄 Apostilas',
-      description: 'Escolha sua apostila abaixo.' }],
+      description: 'Escolha sua apostila abaixo.', image: { url: 'attachment://banner.png' } }],
+    files: [{ attachment: path.join(__dirname, '../assets/banner.png'), name: 'banner.png' }],
     components: [{ type: 1, components: [
       { type: 2, style: 2, custom_id: BUTTONS.grades, label: 'Apostilas' },
       { type: 2, style: 2, custom_id: BUTTONS.action, label: 'SP em Ação' },

@@ -64,7 +64,10 @@ test('painel tem dois botões lado a lado e os formulários preservam as opçõe
   const p = panel(); assert.equal(p.components.length,1);
   assert.equal(p.embeds[0].title,'📄 Apostilas');
   assert.equal(p.embeds[0].description,'Escolha sua apostila abaixo.');
-  assert.equal(p.files,undefined); assert.equal(p.embeds[0].image,undefined);
+  assert.deepEqual(p.embeds[0].image, { url: 'attachment://banner.png' });
+  assert.equal(p.files.length, 1); assert.equal(p.files[0].name, 'banner.png');
+  assert.equal(p.files[0].attachment, path.join(__dirname, '../assets/banner.png'));
+  assert.equal(fs.readFileSync(p.files[0].attachment).subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
   assert.deepEqual(p.components[0].components.map(b=>[b.label,b.custom_id]), [['Apostilas',BUTTONS.grades],['SP em Ação',BUTTONS.action]]);
   for (const [button, modalId, menuId, values] of [[BUTTONS.grades, MODALS.grades, IDS.grades, GRADES], [BUTTONS.action, MODALS.action, IDS.action, ACTION]]) {
     const modal=choiceModal(button);
