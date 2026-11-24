@@ -1,0 +1,262 @@
+[
+  {
+    "nome": "1781599",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169678/1781599.pdf",
+    "original_sha256": "713357e225321558ec68d257e626ef0060a6ed8a948ace0e5f4f1f76ac44d8b1",
+    "paginas": 162,
+    "sha256": "4c518a8910a1e320a4c685ac56ab08bc2b6095780233ec8f0c41ddec300b28a1",
+    "bytes": 114230204,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1781599-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1781645",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169683/1781645.pdf",
+    "original_sha256": "732b5176f4591a528907d74b37f38ec73916deda5baf2e23da0e632e2b824032",
+    "paginas": 162,
+    "sha256": "ef62a7999542ac22ed6f4221591a2ad19f0610e324e0eab588ba6391a589cd95",
+    "bytes": 135687902,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1781645-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1781562",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169673/1781562.pdf",
+    "original_sha256": "a40fd966b2fcd30567fed8fb20a9d503923b9e52bb60a8d71e88a51c2c2e8e8b",
+    "paginas": 290,
+    "sha256": "eea272b7440ac380fd3e83e020519e6d7393758018fcddd9027c280d75b8f72a",
+    "bytes": 109093749,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1781562-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1781692",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169691/1781692.pdf",
+    "original_sha256": "a3141b05b105867eef51fe7a96d1abb47f6233da307417ea21012315f6629dfc",
+    "paginas": 162,
+    "sha256": "4131e83e53efa7a1902482105762dc89b1df246f3d6245caa23986792e97f82e",
+    "bytes": 61814552,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1781692-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1781734",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169695/1781734.pdf",
+    "original_sha256": "00fc243ef74d19d83b536cde33166a828866d8f1a7660e102c42d7bb9985c32e",
+    "paginas": 178,
+    "sha256": "4292a2bd6c45695bdf035b536376d696335bbe3f0da6722fa8e7072abbc0a157",
+    "bytes": 122746707,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1781734-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1781669",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169686/1781669.pdf",
+    "original_sha256": "413d2a8a7b417b9bb0e8268bb4e77cb1f739a011cb231aedb58071e35023c720",
+    "paginas": 290,
+    "sha256": "4ecdd3b16be012c28b868a09aa75b858d0cc264b251f226a1466709662ef6996",
+    "bytes": 80681659,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1781669-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1783558",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169718/1783558.pdf",
+    "original_sha256": "fcae2d9d01ece585fd4ebcceb6c22d6e3935d3f9ee67afbd36d76592e1ac858a",
+    "paginas": 162,
+    "sha256": "c74b715edcf5449defa80ebce19055f2fe4b6b3c6a1c9aa31a9dbd20cdfe103f",
+    "bytes": 100999918,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1783558-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1783579",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169722/1783579.pdf",
+    "original_sha256": "1a755b3289a07ed176595ed256b045ca2511b2430014aa4b8fe2d7b79026cbae",
+    "paginas": 146,
+    "sha256": "80572532a9d5234cf6fb05c66e139f8e1b99a373c33636be36acf069ea024ab2",
+    "bytes": 95197475,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1783579-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1783527",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169714/1783527.pdf",
+    "original_sha256": "03daa0467ea0d0713124da815dd68045c05ee4bd02132846416b2b88739291e0",
+    "paginas": 290,
+    "sha256": "81f78032dd613ca5cb75bcf858522446f0a1d0dbf791ed1eb59e39463713b834",
+    "bytes": 71981748,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1783527-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1783622",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169730/1783622.pdf",
+    "original_sha256": "d6e68f2f77ea48d0e450aa9c922940378117de0959499bc9070c49847bd4b544",
+    "paginas": 194,
+    "sha256": "4e98cf2dd834eca54fa713e3d49d11ad2a7c014bde7a72f84169ef44cbfa6a26",
+    "bytes": 120120223,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1783622-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1783646",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169734/1783646.pdf",
+    "original_sha256": "5599dd39fd1a94915fbb401656e93e54060610c84533f4509663effb6143f183",
+    "paginas": 162,
+    "sha256": "778dd07b38c74300b6b41f9b77ad309405cb5080f7bc80037bf5e7e8e6b10af7",
+    "bytes": 65494304,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1783646-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1783605",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169726/1783605.pdf",
+    "original_sha256": "faa56ac557a9d27ee0ea9d0cc1ab6b276732720c5b7f107aeb69b2b6cbd4175f",
+    "paginas": 290,
+    "sha256": "bdac6c947bd242989c1ea1d7f6e60f3ff979587daf7d1e2e0bfaf7ce32bba1fc",
+    "bytes": 71151840,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1783605-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1784592",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169761/1784592.pdf",
+    "original_sha256": "fa2fd6cafceac0da1dd5a24546296585c184486bdd8caacad165efd3e3d1c05d",
+    "paginas": 194,
+    "sha256": "6dd3367b86e59b2cd26caaf7cefa2008005058e85c3baefdb133ab123c21e279",
+    "bytes": 46139789,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1784592-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1784568",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169756/1784568.pdf",
+    "original_sha256": "04d77f9be0e15c35554fd3c009379c10e253159d8495e01bc44cd850bd311b32",
+    "paginas": 178,
+    "sha256": "d2a510011e224d5a7849216ef479c1a370c27a6252b2feeef3a4570e74c6c252",
+    "bytes": 55738657,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1784568-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1784616",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169766/1784616.pdf",
+    "original_sha256": "8c7ca2555b888f8aa437e8d5a766263a32d2dabf8c913e95da912f4f76a2b2fb",
+    "paginas": 290,
+    "sha256": "55052c785c57a4ec95079ea26a084bb0aac9c16f653bc194390adeabb6fcd743",
+    "bytes": 39366086,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1784616-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1784647",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169775/1784647.pdf",
+    "original_sha256": "dd37eb335c1db5dcff6d7f43c925e7879b1a2169b46bcf112ba1f550c8508463",
+    "paginas": 210,
+    "sha256": "f0a9b2101b5367d26009a53a296a058649165d1228a4e14ed22073b793a4d4f6",
+    "bytes": 76517575,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1784647-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1784631",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169770/1784631.pdf",
+    "original_sha256": "a34009a0d5cefbf3ab3e6365c36c77bd56e90fee1e36ec4fefc5a0d4e2b48aff",
+    "paginas": 178,
+    "sha256": "054e408c196d02c57c42cccd3fb1b297680aaac602f5582d494957febae69a7e",
+    "bytes": 56371815,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1784631-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1784689",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169785/1784689.pdf",
+    "original_sha256": "7b9c24f6b47580d5b8717c89e5607a65a3174b97eafa4f31903995737404faf0",
+    "paginas": 258,
+    "sha256": "eb6dda5309dedb85145a158f9140ac3eb302a36638aa8898b18969256fd231c5",
+    "bytes": 40263439,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1784689-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1784773",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169800/1784773.pdf",
+    "original_sha256": "0c33b079e4b684240e983f88a7321d60f333c03ff0ba117d3535c0f35c8e99f7",
+    "paginas": 194,
+    "sha256": "72114746f34ba526c48b52d10b93feef4852e9b3fb1dd95e4be38f80bec607f0",
+    "bytes": 50466059,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1784773-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "1784795",
+    "fonte": "https://acervocmsp.educacao.sp.gov.br/169804/1784795.pdf",
+    "original_sha256": "699cf85d954ef13ff63f1b852c89651ba3aae1926a38d977c9f11338d5575903",
+    "paginas": 290,
+    "sha256": "24de144ec6528564912c2e4c91c3a36bfe7dc22ddf5eb15d8fdb3ea6125ef5c6",
+    "bytes": 51253439,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/1784795-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "portugues1",
+    "fonte": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/portugues1.pdf",
+    "original_sha256": "f0c8d7b486de47130a665bb6e09635dfb9d71dcccb84984fc06ed51fad759341",
+    "paginas": 180,
+    "sha256": "76b8e887ad089de52f4312c0c09d23967267d18488e2164703eabc9c351d67ca",
+    "bytes": 35453185,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/portugues1-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "portugues2",
+    "fonte": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/portugues2.pdf",
+    "original_sha256": "5d0b0b2b5124eab869ae09e04ed857c7a508ede4a188cc7c8c31e89f3d900788",
+    "paginas": 188,
+    "sha256": "c423e69da01142d753e78776411a9a5b03805c17d6eceae63e9b54f180ab433e",
+    "bytes": 44708599,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/portugues2-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "portugues3",
+    "fonte": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/portugues3.pdf",
+    "original_sha256": "2a6d7d37b0d3c33e26c390db129dd6888e88fad2718ffefad8ada0699cb4d82b",
+    "paginas": 372,
+    "sha256": "5f3ffed57a195a70eaaac217c97150ee60edf03ed942414f7300ec3b3ad1dfee",
+    "bytes": 70086020,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/portugues3-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "matematica1",
+    "fonte": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/matematica1.pdf",
+    "original_sha256": "ca8a89d25179f41782600482238b372f14f28f648e077cb645465942cc26f9e3",
+    "paginas": 180,
+    "sha256": "b171b8e6149b02629a86099737df660d70449c94e2fb5854d2156cc07d47fa86",
+    "bytes": 59137384,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/matematica1-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "matematica2",
+    "fonte": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/matematica2.pdf",
+    "original_sha256": "9b4f8e40b4bca80638b4612876ffc7ce68a8d5fc30e86f49aa32d986478e18c7",
+    "paginas": 188,
+    "sha256": "2ad00fdd3334d8afb8fceda2b2d8aa379aa2f2ee80d44a8ad27fc386ec3d7fac",
+    "bytes": 104970684,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/matematica2-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  },
+  {
+    "nome": "matematica3",
+    "fonte": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/matematica3.pdf",
+    "original_sha256": "1cfbf4b728946353e811ad90abb1e676694f251104093183827d08d8bbc88213",
+    "paginas": 380,
+    "sha256": "d8e2fc1b6d5842b6f9af66f20b46cc12ea3fe387a071444a457844402a13e7b6",
+    "bytes": 67572142,
+    "url": "https://github.com/YungCoffe/apostila-vyxutils-pdfs/releases/download/apostilas-2026-vyxutils/matematica3-VyxUtils.pdf",
+    "verificacao": "marca detectada em todas as páginas; 3 páginas renderizadas; SHA-256 público confere"
+  }
+]
