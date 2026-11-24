@@ -33,8 +33,8 @@ function readCatalog() {
   return value;
 }
 
-// A configuração não comprova a marca: também é necessária uma entrada
-// revisada no código. A lista está vazia até haver PDFs comprovados.
+// A configuração, por si só, não autoriza um link: também é necessária uma
+// entrada na lista do código. Isso não confere o hash dos bytes em cada clique.
 function validFile(file) {
   if (!file || file.watermarked !== true || typeof file.id !== 'string' || typeof file.url !== 'string' || typeof file.label !== 'string' || !file.label.trim()) return false;
   if (!Object.hasOwn(VERIFIED, file.id)) return false;
