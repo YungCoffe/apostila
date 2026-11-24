@@ -3,7 +3,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { spawnSync } = require('node:child_process');
-const { BUTTONS, MODALS, IDS, panel, selection, choiceModal, gradeMenu } = require('../src/ui');
+const { BUTTONS, MODALS, IDS, panel, selection, choiceModal, gradeMenu, actionGradeMenu } = require('../src/ui');
 const { readCatalog, GRADES, ACTION } = require('../src/catalog');
 const { makeHandler, makePrefixHandler } = require('../src/handlers');
 const catalog = readCatalog();
@@ -12,14 +12,15 @@ function interaction(extra) {
     replies:[], async reply(p){this.replies.push(p);this.replied=true;}, async showModal(m){this.modal=m;this.replied=true;},
     async deferReply(p){this.deferred=true;this.deferral=p;}, async editReply(p){this.replies.push(p);}, ...extra };
 }
-test('Apostilas abre menu privado e SP em Ação preserva formulário', async()=>{
+test('Apostilas e SP em Ação abrem menus privados', async()=>{
   const handle=makeHandler({readCatalog,adminBit:8n});
   const grades=interaction({isButton:()=>true,customId:BUTTONS.grades});
   await handle(grades); const {flags,...expected}=gradeMenu(catalog);
   assert.equal(flags,64); assert.equal(grades.deferral.flags,64); assert.deepEqual(grades.replies,[expected]);
   assert.equal(grades.modal,undefined);
   const action=interaction({isButton:()=>true,customId:BUTTONS.action});
-  await handle(action); assert.deepEqual(action.modal,choiceModal(BUTTONS.action)); assert.equal(action.replies.length,0);
+  await handle(action); const {flags:actionFlags,...actionExpected}=actionGradeMenu(catalog);
+  assert.equal(actionFlags,64); assert.equal(action.deferral.flags,64); assert.deepEqual(action.replies,[actionExpected]); assert.equal(action.modal,undefined);
   const unknown=interaction({isButton:()=>true,customId:'outro'}); await handle(unknown); assert.equal(unknown.modal,undefined);
 });
 test('menu segue a referência e conta somente arquivos liberados',()=>{
