@@ -3,7 +3,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { spawnSync } = require('node:child_process');
-const { BUTTONS, MODALS, IDS, panel, selection, choiceModal } = require('../src/ui');
+const { BUTTONS, MODALS, IDS, panel, selection, choiceModal, gradeMenu } = require('../src/ui');
 const { readCatalog, GRADES, ACTION } = require('../src/catalog');
 const { makeHandler, makePrefixHandler } = require('../src/handlers');
 const catalog = readCatalog();
@@ -12,13 +12,41 @@ function interaction(extra) {
     replies:[], async reply(p){this.replies.push(p);this.replied=true;}, async showModal(m){this.modal=m;this.replied=true;},
     async deferReply(p){this.deferred=true;this.deferral=p;}, async editReply(p){this.replies.push(p);}, ...extra };
 }
-test('ambos os botões abrem apenas seu próprio formulário', async()=>{
+test('Apostilas abre menu privado e SP em Ação preserva formulário', async()=>{
   const handle=makeHandler({readCatalog,adminBit:8n});
-  for(const button of Object.values(BUTTONS)) {
-    const i=interaction({isButton:()=>true,customId:button});
-    await handle(i); assert.deepEqual(i.modal,choiceModal(button)); assert.equal(i.replies.length,0);
-  }
+  const grades=interaction({isButton:()=>true,customId:BUTTONS.grades});
+  await handle(grades); const {flags,...expected}=gradeMenu(catalog);
+  assert.equal(flags,64); assert.equal(grades.deferral.flags,64); assert.deepEqual(grades.replies,[expected]);
+  assert.equal(grades.modal,undefined);
+  const action=interaction({isButton:()=>true,customId:BUTTONS.action});
+  await handle(action); assert.deepEqual(action.modal,choiceModal(BUTTONS.action)); assert.equal(action.replies.length,0);
   const unknown=interaction({isButton:()=>true,customId:'outro'}); await handle(unknown); assert.equal(unknown.modal,undefined);
+});
+test('menu segue a referência e conta somente arquivos liberados',()=>{
+  const { ActionRowBuilder, EmbedBuilder }=require('discord.js');
+  const p=gradeMenu(catalog); const options=p.components[0].components[0].options;
+  assert.equal(p.flags,64); assert.equal(p.embeds[0].title,'Apostilas normais – Série');
+  assert.equal(p.components[0].components[0].placeholder,'Selecione uma série');
+  assert.deepEqual(options.map(x=>x.value),['em3','em2','em1','9','8','7','6']);
+  for(const o of options) { const count=catalog.groups[o.value].files.filter(require('../src/catalog').validFile).length; assert.equal(o.description,`${count} ${count===1?'volume disponível':'volumes disponíveis'}`); }
+  assert.doesNotThrow(()=>ActionRowBuilder.from(p.components[0]).toJSON());
+  assert.doesNotThrow(()=>new EmbedBuilder(p.embeds[0]).toJSON());
+  const empty=structuredClone(catalog); empty.groups.em3.files.forEach(f=>f.url=null);
+  assert.equal(gradeMenu(empty).components[0].components[0].options[0].description,'0 volumes disponíveis');
+});
+test('cada série do novo menu retorna os mesmos arquivos em resposta privada', async()=>{
+  for(const option of gradeMenu(catalog).components[0].components[0].options) {
+    const i=interaction({isStringSelectMenu:()=>true,customId:IDS.grades,values:[option.value]});
+    await makeHandler({readCatalog,adminBit:8n})(i);
+    const {flags,...expected}=selection(catalog,IDS.grades,option.value);
+    assert.equal(flags,64); assert.equal(i.deferral.flags,64); assert.deepEqual(i.replies,[expected]);
+  }
+});
+test('erro ao carregar catálogo no menu falha em resposta privada', async()=>{
+  const i=interaction({isButton:()=>true,customId:BUTTONS.grades});
+  await makeHandler({readCatalog:()=>{throw Error('erro');},adminBit:8n,log:()=>{}})(i);
+  assert.equal(i.deferral.flags,64); assert.match(i.replies[0].content,/não foi possível/i);
+  assert.deepEqual(i.replies[0].components,[]);
 });
 test('cada uma das 13 escolhas no formulário devolve a mesma resposta privada', async()=>{
   let checks=0;
