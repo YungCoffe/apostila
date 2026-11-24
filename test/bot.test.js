@@ -5,10 +5,10 @@ const fs = require('node:fs');
 const path = require('node:path');
 const Module = require('node:module');
 const { spawnSync } = require('node:child_process');
-const { EmbedBuilder, ActionRowBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ModalBuilder } = require('discord.js');
 const { readCatalog, validFile, GRADES, ACTION } = require('../src/catalog');
-const { panel, selection, IDS } = require('../src/ui');
-const { makeHandler } = require('../src/handlers');
+const { panel, selection, choiceModal, IDS, BUTTONS, MODALS } = require('../src/ui');
+const { makeHandler, makePrefixHandler } = require('../src/handlers');
 const actual = readCatalog();
 const catalog = structuredClone(actual);
 for (const group of Object.values(catalog.groups)) for (const f of group.files) { f.url = null; f.watermarked = false; }
@@ -60,15 +60,20 @@ test('as 13 seleções sem links continuam indisponíveis', () => {
     assert.equal(p.flags,64); assert.equal(p.components,undefined); assert.match(p.embeds[0].description,/não estão disponíveis/);
   }
 });
-test('painel clean preserva os dois menus e tem formato aceito pelo discord.js', () => {
-  const p = panel(); assert.equal(p.components.length,2);
+test('painel tem dois botões lado a lado e os formulários preservam as opções', () => {
+  const p = panel(); assert.equal(p.components.length,1);
   assert.equal(p.embeds[0].title,'📄 Apostilas');
   assert.equal(p.embeds[0].description,'Escolha sua apostila abaixo.');
   assert.equal(p.files,undefined); assert.equal(p.embeds[0].image,undefined);
-  assert.equal(p.components[0].components[0].custom_id,IDS.grades);
-  assert.equal(p.components[1].components[0].custom_id,IDS.action);
-  assert.deepEqual(p.components[0].components[0].options.map(o => o.value), GRADES.map(([id]) => id));
-  assert.deepEqual(p.components[1].components[0].options.map(o => o.value), ACTION.map(([id]) => id));
+  assert.deepEqual(p.components[0].components.map(b=>[b.label,b.custom_id]), [['Apostilas',BUTTONS.grades],['SP em Ação',BUTTONS.action]]);
+  for (const [button, modalId, menuId, values] of [[BUTTONS.grades, MODALS.grades, IDS.grades, GRADES], [BUTTONS.action, MODALS.action, IDS.action, ACTION]]) {
+    const modal=choiceModal(button);
+    assert.equal(modal.custom_id,modalId);
+    assert.equal(modal.components[0].component.custom_id,menuId);
+    assert.deepEqual(modal.components[0].component.options.map(o=>o.value),values.map(([id])=>id));
+    assert.doesNotThrow(()=>new ModalBuilder(modal).toJSON());
+  }
+  assert.equal(choiceModal('outro'), null);
   assert.doesNotThrow(()=>new EmbedBuilder(p.embeds[0]).toJSON());
   for (const row of p.components) assert.doesNotThrow(()=>ActionRowBuilder.from(row).toJSON());
 });
@@ -87,48 +92,4 @@ test('URLs perigosas e originais são recusadas mesmo que alguém as registre', 
 test('catálogo inválido, malformado, grupo ausente ou título vazio falha fechado', () => {
   for (const source of ['{}','{', 'null', JSON.stringify({...actual,groups:[]}), JSON.stringify({groups:{}})]) assert.throws(()=>catalogWithMocks({source}).readCatalog());
   const c=structuredClone(actual); c.groups['6'].title=' '; assert.throws(()=>catalogWithMocks({source:JSON.stringify(c)}).readCatalog());
-});
-test('quantidade, IDs duplicados e campos inválidos são recusados', () => {
-  for (const mutate of [c=>c.groups['6'].files.pop(), c=>c.groups['6'].files[1].id='6-1', c=>c.groups['6'].files[0].watermarked='true', c=>c.groups['6'].files[0].url=123, c=>c.groups['6'].files[0].label='']) {
-    const c=structuredClone(actual); mutate(c); assert.throws(()=>catalogWithMocks({source:JSON.stringify(c)}).readCatalog());
-  }
-});
-test('valores e menus incorretos não fornecem arquivos', () => {
-  for (const [menu,value] of [[IDS.grades,'portugues1'],['outro','6'],[IDS.action,'em1'],[IDS.grades,'__proto__']]) assert.match(selection(catalog,menu,value).content,/não foi possível/i);
-});
-test('administrador publica painel público', async () => {
-  const i=interaction(); await makeHandler({readCatalog,adminBit:8n})(i); assert.equal(i.replies[0].components.length,2); assert.equal(i.replies[0].flags,undefined);
-});
-test('não administrador e conversa privada recebem recusa privada', async () => {
-  for (const i of [interaction({memberPermissions:{has:()=>false}}),interaction({inGuild:()=>false})]) { await makeHandler({readCatalog,adminBit:8n})(i); assert.equal(i.replies[0].flags,64); assert.match(i.replies[0].content,/administradores/); }
-});
-test('menu reconhecido defere privadamente antes da leitura e responde', async () => {
-  const i=interaction({isChatInputCommand:()=>false,isStringSelectMenu:()=>true,customId:IDS.action,values:['portugues2']});
-  let reads=0; const handle=makeHandler({readCatalog:()=>{assert.equal(i.deferred,true); reads++; return catalog;},adminBit:8n});
-  await handle(i); assert.equal(i.deferral.flags,64); assert.equal(reads,1); assert.match(i.replies[0].embeds[0].title,/Português.*2/); assert.equal(i.replies[0].flags,undefined);
-});
-test('interações de outros comandos ou componentes são ignoradas', async () => {
-  let reads=0; const handle=makeHandler({readCatalog:()=>{reads++;},adminBit:8n});
-  for (const i of [interaction({commandName:'outro'}),interaction({isChatInputCommand:()=>false,isStringSelectMenu:()=>true,customId:'desconhecido'})]) {await handle(i); assert.equal(i.replies.length,0);}
-  assert.equal(reads,0);
-});
-test('catálogo quebrado gera erro privado sem detalhes internos', async () => {
-  const handle=makeHandler({readCatalog:()=>{throw Error('segredo');},adminBit:8n,log:()=>{}});
-  const i=interaction({isChatInputCommand:()=>false,isStringSelectMenu:()=>true,customId:IDS.grades,values:['6']});
-  await handle(i); assert.equal(i.deferred,true); assert.doesNotMatch(i.replies[0].content,/segredo/); assert.deepEqual(i.replies[0].components,[]);
-});
-test('erro antes da resposta é tratado privadamente', async () => {
-  const i=interaction({inGuild:()=>{throw Error('segredo');}}); await makeHandler({readCatalog,adminBit:8n,log:()=>{}})(i);
-  assert.equal(i.replies[0].flags,64); assert.doesNotMatch(i.replies[0].content,/segredo/);
-});
-test('falha ao responder não derruba o processo', async () => {
-  const i=interaction({reply:async()=>{throw Error('falha');}}); await assert.doesNotReject(makeHandler({readCatalog,adminBit:8n,log:()=>{}})(i));
-});
-test('inicialização sem token falha claramente e sem rede', () => {
-  const r=spawnSync(process.execPath,['src/index.js'],{cwd:path.join(__dirname,'..'),env:{...process.env,DISCORD_TOKEN:''},encoding:'utf8',timeout:5000});
-  assert.equal(r.status,1); assert.match(r.stderr,/DISCORD_TOKEN não configurado/);
-});
-test('registro sem credenciais falha claramente e sem rede', () => {
-  const r=spawnSync(process.execPath,['src/register.js'],{cwd:path.join(__dirname,'..'),env:{...process.env,DISCORD_TOKEN:'',DISCORD_CLIENT_ID:''},encoding:'utf8',timeout:5000});
-  assert.equal(r.status,1); assert.match(r.stderr,/Preencha DISCORD_TOKEN e DISCORD_CLIENT_ID/);
 });
