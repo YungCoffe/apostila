@@ -45,9 +45,18 @@ test('arquivo não revisado não é liberado mesmo com declaração e URL HTTPS'
   const c = structuredClone(catalog); Object.assign(c.groups['6'].files[0], file);
   assert.equal(selection(c, IDS.grades, '6').components, undefined);
 });
-test('as 13 seleções reais nunca mostram links sem revisão', () => {
+test('as 13 seleções reais mostram exatamente os links cadastrados', () => {
   for (const [id] of [...GRADES, ...ACTION]) {
     const p = selection(actual, GRADES.some(([g])=>g===id) ? IDS.grades : IDS.action, id);
+    assert.equal(p.flags,64);
+    assert.deepEqual(p.components[0].components.map(button => button.url), actual.groups[id].files.map(f => f.url));
+    assert.doesNotMatch(p.embeds[0].description,/não estão disponíveis/);
+    assert.doesNotThrow(()=>ActionRowBuilder.from(p.components[0]).toJSON());
+  }
+});
+test('as 13 seleções sem links continuam indisponíveis', () => {
+  for (const [id] of [...GRADES, ...ACTION]) {
+    const p = selection(catalog, GRADES.some(([g])=>g===id) ? IDS.grades : IDS.action, id);
     assert.equal(p.flags,64); assert.equal(p.components,undefined); assert.match(p.embeds[0].description,/não estão disponíveis/);
   }
 });
