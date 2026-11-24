@@ -2,7 +2,7 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits, Events, PermissionFlagsBits } = require('discord.js');
 const { readCatalog } = require('./catalog');
-const { makeHandler } = require('./handlers');
+const { makeHandler, makePrefixHandler } = require('./handlers');
 const { getPort, startHttpServer } = require('./http-server');
 const { registerPanelCommand } = require('./auto-register');
 
@@ -19,7 +19,12 @@ async function main() {
     console.error(`Não foi possível abrir a porta HTTP${detail}. Verifique PORT e a disponibilidade da porta.`);
     process.exit(1);
   }
-  const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+  // Ative somente após liberar Message Content no portal do Discord.
+  // Sem essa liberação, solicitar o intent pode impedir o bot de conectar.
+  const prefixEnabled = process.env.APOSTILA_PREFIX_ENABLED === '1';
+  const intents = [GatewayIntentBits.Guilds];
+  if (prefixEnabled) intents.push(GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent);
+  const client = new Client({ intents });
   client.once(Events.ClientReady, ready => {
     console.log(`Conectado como ${ready.user.tag}.`);
     registerPanelCommand(ready).then(result => {
@@ -28,6 +33,7 @@ async function main() {
     }).catch(() => console.error('Não foi possível confirmar o registro de /apostilas no Discord.'));
   });
   client.on(Events.InteractionCreate, makeHandler({ readCatalog, adminBit: PermissionFlagsBits.Administrator }));
+  if (prefixEnabled) client.on(Events.MessageCreate, makePrefixHandler({ adminBit: PermissionFlagsBits.Administrator }));
   client.login(process.env.DISCORD_TOKEN).catch(() => { console.error('Não foi possível conectar ao Discord. Confira as credenciais e a rede.'); process.exit(1); });
 }
 
