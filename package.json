@@ -1,14 +1,14 @@
 {
-  "name": "leiasp-bot",
+  "name": "apostila-bot",
   "version": "1.0.0",
-  "type": "module",
-  "main": "index.js",
+  "private": true,
+  "description": "Painel de apostilas para Discord",
+  "main": "src/index.js",
+  "engines": { "node": ">=20" },
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/index.js",
+    "register": "node src/register.js",
+    "test": "node --test"
   },
-  "dependencies": {
-    "discord.js": "^14.19.3",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2"
-  }
+  "dependencies": { "discord.js": "^14.19.3", "dotenv": "^16.4.7" }
 }
