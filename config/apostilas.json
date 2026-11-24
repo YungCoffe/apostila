@@ -1,0 +1,251 @@
+{
+  "groups": {
+    "6": {
+      "title": "6º ano",
+      "files": [
+        {
+          "id": "6-1",
+          "label": "Ciências, Inglês e Projeto de Vida",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169678/1781599.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "6-2",
+          "label": "História e Geografia",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169683/1781645.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "6-3",
+          "label": "Português e Matemática",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169673/1781562.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "7": {
+      "title": "7º ano",
+      "files": [
+        {
+          "id": "7-1",
+          "label": "Ciências, Inglês e Projeto de Vida",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169691/1781692.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "7-2",
+          "label": "História e Geografia",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169695/1781734.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "7-3",
+          "label": "Português e Matemática",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169686/1781669.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "8": {
+      "title": "8º ano",
+      "files": [
+        {
+          "id": "8-1",
+          "label": "Ciências, Inglês e Projeto de Vida",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169718/1783558.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "8-2",
+          "label": "História e Geografia",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169722/1783579.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "8-3",
+          "label": "Português e Matemática",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169714/1783527.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "9": {
+      "title": "9º ano",
+      "files": [
+        {
+          "id": "9-1",
+          "label": "Ciências, Inglês e Projeto de Vida",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169730/1783622.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "9-2",
+          "label": "História e Geografia",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169734/1783646.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "9-3",
+          "label": "Português e Matemática",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169726/1783605.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "em1": {
+      "title": "1ª série do Ensino Médio",
+      "files": [
+        {
+          "id": "em1-1",
+          "label": "Física, Biologia e Química",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169761/1784592.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "em1-2",
+          "label": "História, Geografia e Inglês",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169756/1784568.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "em1-3",
+          "label": "Português e Matemática",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169766/1784616.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "em2": {
+      "title": "2ª série do Ensino Médio",
+      "files": [
+        {
+          "id": "em2-1",
+          "label": "História, Geografia e Inglês",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169775/1784647.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "em2-2",
+          "label": "Física, Biologia e Química",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169770/1784631.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "em2-3",
+          "label": "Português e Matemática",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169785/1784689.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "em3": {
+      "title": "3ª série do Ensino Médio",
+      "files": [
+        {
+          "id": "em3-1",
+          "label": "História, Física e Inglês",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169800/1784773.pdf",
+          "url": null,
+          "watermarked": false
+        },
+        {
+          "id": "em3-2",
+          "label": "Português e Matemática",
+          "sourceReference": "https://acervocmsp.educacao.sp.gov.br/169804/1784795.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "portugues1": {
+      "title": "SP em Ação • Português • Volume 1",
+      "files": [
+        {
+          "id": "portugues1",
+          "label": "Português • Volume 1",
+          "sourceReference": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/portugues1.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "portugues2": {
+      "title": "SP em Ação • Português • Volume 2",
+      "files": [
+        {
+          "id": "portugues2",
+          "label": "Português • Volume 2",
+          "sourceReference": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/portugues2.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "portugues3": {
+      "title": "SP em Ação • Português • Volume 3",
+      "files": [
+        {
+          "id": "portugues3",
+          "label": "Português • Volume 3",
+          "sourceReference": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/portugues3.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "matematica1": {
+      "title": "SP em Ação • Matemática • Volume 1",
+      "files": [
+        {
+          "id": "matematica1",
+          "label": "Matemática • Volume 1",
+          "sourceReference": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/matematica1.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "matematica2": {
+      "title": "SP em Ação • Matemática • Volume 2",
+      "files": [
+        {
+          "id": "matematica2",
+          "label": "Matemática • Volume 2",
+          "sourceReference": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/matematica2.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    },
+    "matematica3": {
+      "title": "SP em Ação • Matemática • Volume 3",
+      "files": [
+        {
+          "id": "matematica3",
+          "label": "Matemática • Volume 3",
+          "sourceReference": "https://github.com/YungCoffe/sp-acao-apostilas/releases/download/apostilas-2026/matematica3.pdf",
+          "url": null,
+          "watermarked": false
+        }
+      ]
+    }
+  }
+}
