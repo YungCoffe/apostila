@@ -32,6 +32,22 @@ function choiceModal(buttonId) {
     components: [{ type: 18, label: grade ? 'Escolha a série' : 'Escolha o volume', component: menu }] };
 }
 
+// Menu privado como a referência; a contagem só inclui arquivos liberados.
+function gradeMenu(catalog) {
+  const labels = { em3: '3ª Série', em2: '2ª Série', em1: '1ª Série',
+    '9': '9º Ano', '8': '8º Ano', '7': '7º Ano', '6': '6º Ano' };
+  const options = [...GRADES].reverse().map(([id]) => {
+    const group = getGroup(catalog, id, GRADES.map(([key]) => key));
+    const count = group ? group.files.filter(validFile).length : 0;
+    return { label: labels[id], value: id, description: `${count} ${count === 1 ? 'volume disponível' : 'volumes disponíveis'}` };
+  });
+  return { flags: 64, embeds: [{ color: 0x2b2d31, title: 'Apostilas normais – Série',
+    description: 'Escolha a série e veja os volumes disponíveis.' }],
+    components: [{ type: 1, components: [{ type: 3, custom_id: IDS.grades,
+      placeholder: 'Selecione uma série', min_values: 1, max_values: 1, options }] }],
+    allowedMentions: { parse: [] } };
+}
+
 function selection(catalog, customId, value) {
   const source = customId === IDS.grades ? GRADES : customId === IDS.action ? ACTION : null;
   const group = source && getGroup(catalog, value, source.map(x => x[0]));
@@ -45,4 +61,4 @@ function selection(catalog, customId, value) {
   if (valid.length) result.components = [{ type: 1, components: valid.map(file => ({ type: 2, style: 5, label: file.label.trim().slice(0, 80), url: file.url })) }];
   return result;
 }
-module.exports = { IDS, BUTTONS, MODALS, panel, choiceModal, selection };
+module.exports = { IDS, BUTTONS, MODALS, panel, choiceModal, gradeMenu, selection };
