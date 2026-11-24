@@ -93,6 +93,7 @@ Module._load = function(name, ...args) {
   if (name === 'discord.js') return {Client:FakeClient, GatewayIntentBits:{Guilds:1}, Events:{ClientReady:'ready',InteractionCreate:'interaction'}, PermissionFlagsBits:{Administrator:8n}};
   if (name === './catalog') return {readCatalog:()=>({})};
   if (name === './handlers') return {makeHandler:()=>()=>{}};
+  if (name === './auto-register') return {registerPanelCommand:async()=> 'existente'};
   return original.call(this, name, ...args);
 };
 require('./src/index.js');

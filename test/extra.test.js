@@ -37,14 +37,20 @@ test('inicialização aguarda a porta e configura intents, handlers e login sem 
   try {
     let release;
     let receivedPort;
+    let registeredClient;
     loadWithMocks('../src/index',{
       'dotenv':{config:()=>({})},
       './http-server':{getPort:()=>12345,startHttpServer:port=>{receivedPort=port; return new Promise(resolve=>{release=resolve;});}},
+      './auto-register':{registerPanelCommand:async client=>{registeredClient=client; return 'existente';}},
       'discord.js':{Client:FakeClient,GatewayIntentBits:{Guilds:1},Events:{ClientReady:'ready',InteractionCreate:'interaction'},PermissionFlagsBits:{Administrator:8n}},
     });
     assert.equal(receivedPort,12345); assert.equal(instance,undefined);
     release(); await new Promise(resolve=>setImmediate(resolve));
     assert.deepEqual(instance.opts.intents,[1]); assert.equal(instance.token,'token-de-teste');
     assert.equal(typeof instance.handlers.ready,'function'); assert.equal(typeof instance.handlers.interaction,'function');
+    const ready = { user: { tag: 'teste' } };
+    instance.handlers.ready(ready);
+    await new Promise(resolve=>setImmediate(resolve));
+    assert.equal(registeredClient, ready);
   } finally { if (old===undefined) delete process.env.DISCORD_TOKEN; else process.env.DISCORD_TOKEN=old; }
 });

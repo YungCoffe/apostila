@@ -19,16 +19,15 @@ O catálogo contém as URLs de origem das 20 apostilas por série como metadados
 ## Configuração e execução
 
 1. Instale dependências com `npm install` e copie `.env.example` para `.env`.
-2. Preencha `DISCORD_TOKEN` e `DISCORD_CLIENT_ID` no `.env`. Nunca compartilhe nem comite o token. Opcionalmente, preencha `DISCORD_GUILD_ID` para registrar o comando apenas em um servidor e disponibilizá-lo mais rápido. Sem ele, o comando é global e pode levar tempo para aparecer.
-3. Execute `npm run register`. O registro adiciona ou atualiza somente `/apostilas`; não substitui os demais comandos da aplicação.
-4. Execute `npm start` em uma máquina ou serviço que mantenha o processo online. Registrar o comando não inicia o bot.
-5. Como administrador do servidor, use `/apostilas` no canal desejado. A permissão de administrador também é conferida no recebimento da interação. O painel é público e as respostas às escolhas são privadas.
+2. Preencha `DISCORD_TOKEN` no `.env`. Nunca compartilhe nem comite o token.
+3. Execute `npm start` em uma máquina ou serviço que mantenha o processo online. Ao conectar, o bot registra `/apostilas` globalmente se ele ainda não existir. O comando pode levar tempo para aparecer. Um comando homônimo com configurações diferentes não é alterado; nesse caso, verifique os logs.
+4. Como administrador do servidor, use `/apostilas` no canal desejado. A permissão de administrador também é conferida no recebimento da interação. O painel é público e as respostas às escolhas são privadas.
 
-Não foi feito registro, deploy, hospedagem nem teste real no Discord durante a criação do projeto.
+Como alternativa manual, `npm run register` requer `DISCORD_CLIENT_ID` e adiciona ou atualiza somente `/apostilas`, sem substituir os demais comandos. Se `DISCORD_GUILD_ID` estiver definido, o registro manual será específico do servidor; o registro automático continua global. O comando manual pode atualizar um comando homônimo existente e não inicia o bot.
 
 ## Porta HTTP para Render
 
-Como Web Service no Render, use `npm install` como comando de build e `npm start` para iniciar. Configure `DISCORD_TOKEN` nas variáveis de ambiente do serviço, sem publicá-lo no repositório. Para registrar `/apostilas`, configure também `DISCORD_CLIENT_ID` e, opcionalmente, `DISCORD_GUILD_ID`, e execute `npm run register` separadamente; o registro não inicia o bot. Configure quaisquer outras variáveis necessárias, como `APOSTILAS_CONFIG`, conforme o armazenamento usado.
+Como Web Service no Render, use `npm install` como comando de build e `npm start` para iniciar. Configure `DISCORD_TOKEN` nas variáveis de ambiente do serviço, sem publicá-lo no repositório. O registro global acontece automaticamente após a conexão, sem executar `npm run register`. Confira os logs para verificar o resultado. Configure quaisquer outras variáveis necessárias, como `APOSTILAS_CONFIG`, conforme o armazenamento usado.
 
 O processo escuta em `0.0.0.0` na porta indicada por `PORT` (padrão `10000` quando ausente ou vazia). `PORT` deve ser inteiro de 1 a 65535. `GET /` e `GET /health` retornam JSON com `http: disponível` e `discord: não verificado`; podem ser usados para verificar a disponibilidade HTTP, **não** a conexão ou a prontidão do Discord. Outros caminhos retornam 404 e outros métodos, 405. A porta abre antes do login no Discord, portanto uma resposta HTTP positiva não significa que o bot está conectado. PORT inválida ou falha ao abrir a porta encerram o processo antes do login; uma falha de login também encerra o processo.
 
