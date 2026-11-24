@@ -1,5 +1,5 @@
 'use strict';
-const { panel, selection, IDS } = require('./ui');
+const { panel, selection, IDS, BUTTONS, MODALS, choiceModal } = require('./ui');
 
 // Dependencies are injected so interactions can be exercised offline.
 function makeHandler({ readCatalog, adminBit, log = console.error }) {
@@ -10,6 +10,16 @@ function makeHandler({ readCatalog, adminBit, log = console.error }) {
           return await interaction.reply({ content: 'Somente administradores podem criar o painel em um servidor.', flags: 64, allowedMentions: { parse: [] } });
         }
         return await interaction.reply(panel());
+      }
+      if (interaction.isButton?.() && Object.values(BUTTONS).includes(interaction.customId)) {
+        return await interaction.showModal(choiceModal(interaction.customId));
+      }
+      if (interaction.isModalSubmit?.() && Object.values(MODALS).includes(interaction.customId)) {
+        const menuId = interaction.customId === MODALS.grades ? IDS.grades : IDS.action;
+        const values = interaction.fields.getStringSelectValues(menuId);
+        await interaction.deferReply({ flags: 64 });
+        const { flags: _ephemeralAlreadySet, ...payload } = selection(readCatalog(), menuId, values[0]);
+        return await interaction.editReply(payload);
       }
       if (interaction.isStringSelectMenu() && Object.values(IDS).includes(interaction.customId)) {
         // Discord expires interaction tokens quickly. Acknowledge before disk I/O.
@@ -27,4 +37,14 @@ function makeHandler({ readCatalog, adminBit, log = console.error }) {
     }
   };
 }
-module.exports = { makeHandler };
+
+function makePrefixHandler({ adminBit, log = console.error }) {
+  return async function handleMessage(message) {
+    if (!message.guild || !message.author || message.author.bot || message.system ||
+        typeof message.content !== 'string' || message.content.trim().toLowerCase() !== '*apostila' ||
+        !message.member?.permissions?.has(adminBit)) return;
+    try { await message.channel.send(panel()); }
+    catch { log('Não foi possível criar o painel pelo comando de texto.'); }
+  };
+}
+module.exports = { makeHandler, makePrefixHandler };
