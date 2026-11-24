@@ -4,9 +4,9 @@ Bot em **discord.js v14** para publicar um painel persistente de apostilas. Um a
 
 ## Situação importante
 
-**Os PDFs com marca d’água não estão incluídos nem hospedados neste projeto.** As 26 entradas estão indisponíveis; nenhum link original é mostrado ao usuário. `watermarked: true` por si só não comprova a marca e não libera link: também é necessária uma entrada revisada em `src/verified-files.js`, atualmente vazia. Antes de qualquer liberação, inspecione o PDF correto e confirme a marca roxa **VyxUtils** no rodapé, hospede exatamente esses bytes em HTTPS e confira em janela anônima, sem autenticação nem página intermediária. Registre a URL exata e o SHA-256 do arquivo inspecionado. Arquivos licenciados devem ser distribuídos apenas com autorização aplicável.
+**Os PDFs não estão incluídos neste repositório.** As 26 entradas apontam para a release pública `apostilas-2026-vyxutils` em `YungCoffe/apostila-vyxutils-pdfs`. O catálogo e `src/verified-files.js` registram os links e SHA-256 associados ao manifesto; `watermarked: true` por si só não comprova a marca. A revisão visual completa dos PDFs ainda está pendente, assim como a comprovação dos direitos de redistribuição e alteração. Distribua materiais protegidos somente com autorização aplicável.
 
-A lista revisada e o hash são registros de uma conferência humana; o bot não baixa, inspeciona nem recalcula hash do PDF a cada clique. Mesmo após a conferência, URLs podem mudar, redirecionar ou expirar. Portanto, só adicione uma URL se a hospedagem e o processo de verificação assegurarem que ela continuará servindo os bytes examinados; caso contrário, mantenha a entrada indisponível. Não há garantia técnica contra uma hospedagem que troque os bytes depois da revisão.
+A lista e os hashes refletem a conferência dos metadados da release e do manifesto, não uma revisão visual integral; o bot não baixa, inspeciona nem recalcula hash do PDF a cada clique. Mesmo após a conferência, URLs podem mudar, redirecionar ou expirar. Portanto, só adicione uma URL se a hospedagem e o processo de verificação assegurarem que ela continuará servindo os bytes examinados; caso contrário, mantenha a entrada indisponível. Não há garantia técnica contra uma hospedagem que troque os bytes depois da revisão.
 
 O catálogo contém as URLs de origem das 20 apostilas por série como metadados; elas não são exibidas aos usuários. Os seis links de origem do SP em Ação aparecem somente como metadados `sourceReference`, nunca como botões. Nada aqui converte ou hospeda PDFs automaticamente.
 
@@ -25,6 +25,14 @@ O catálogo contém as URLs de origem das 20 apostilas por série como metadados
 5. Como administrador do servidor, use `/apostilas` no canal desejado. A permissão de administrador também é conferida no recebimento da interação. O painel é público e as respostas às escolhas são privadas.
 
 Não foi feito registro, deploy, hospedagem nem teste real no Discord durante a criação do projeto.
+
+## Porta HTTP para Render
+
+Como Web Service no Render, use `npm install` como comando de build e `npm start` para iniciar. Configure `DISCORD_TOKEN` nas variáveis de ambiente do serviço, sem publicá-lo no repositório. Para registrar `/apostilas`, configure também `DISCORD_CLIENT_ID` e, opcionalmente, `DISCORD_GUILD_ID`, e execute `npm run register` separadamente; o registro não inicia o bot. Configure quaisquer outras variáveis necessárias, como `APOSTILAS_CONFIG`, conforme o armazenamento usado.
+
+O processo escuta em `0.0.0.0` na porta indicada por `PORT` (padrão `10000` quando ausente ou vazia). `PORT` deve ser inteiro de 1 a 65535. `GET /` e `GET /health` retornam JSON com `http: disponível` e `discord: não verificado`; podem ser usados para verificar a disponibilidade HTTP, **não** a conexão ou a prontidão do Discord. Outros caminhos retornam 404 e outros métodos, 405. A porta abre antes do login no Discord, portanto uma resposta HTTP positiva não significa que o bot está conectado. PORT inválida ou falha ao abrir a porta encerram o processo antes do login; uma falha de login também encerra o processo.
+
+Os testes HTTP offline usam somente conexões locais e um cliente Discord simulado; não verificam o serviço implantado nem fazem login real.
 
 ## Cadastrar os 26 links com marca d’água
 
