@@ -3,7 +3,7 @@ const { GRADES, ACTION, getGroup, validFile } = require('./catalog');
 const path = require('node:path');
 
 const COLOR = 0x8a2be2;
-const IDS = { grades: 'apostila:grades:v1', action: 'apostila:sp:v1' };
+const IDS = { grades: 'apostila:grades:v1', action: 'apostila:sp:v1', actionGrade: 'apostila:sp:serie:v1' };
 const BUTTONS = { grades: 'apostila:botao:grades:v1', action: 'apostila:botao:sp:v1' };
 const MODALS = { grades: 'apostila:modal:grades:v1', action: 'apostila:modal:sp:v1' };
 const select = (id, placeholder, options) => ({
@@ -48,7 +48,49 @@ function gradeMenu(catalog) {
     allowedMentions: { parse: [] } };
 }
 
+// A SEDUC indica o livro 2 para o 9º ano e o livro 3 para a 3ª série.
+const ACTION_GRADES = Object.freeze({
+  '9': { label: '9º Ano', groups: ['portugues2', 'matematica2'] },
+  em3: { label: '3ª Série do Ensino Médio', groups: ['portugues3', 'matematica3'] },
+});
+
+function actionFiles(catalog, grade) {
+  if (!Object.hasOwn(ACTION_GRADES, grade)) return null;
+  const ids = ACTION.map(([id]) => id);
+  return ACTION_GRADES[grade].groups.flatMap(id => {
+    const group = getGroup(catalog, id, ids);
+    return group ? group.files : [];
+  });
+}
+
+function actionGradeMenu(catalog) {
+  const options = Object.keys(ACTION_GRADES).map(id => {
+    const count = actionFiles(catalog, id).filter(validFile).length;
+    return { label: ACTION_GRADES[id].label, value: id,
+      description: `${count} ${count === 1 ? 'arquivo disponível' : 'arquivos disponíveis'}` };
+  });
+  return { flags: 64, embeds: [{ color: 0x2b2d31, title: 'SP em Ação – Série',
+    description: 'Escolha a série para ver os materiais de Português e Matemática.' }],
+    components: [{ type: 1, components: [{ type: 3, custom_id: IDS.actionGrade,
+      placeholder: 'Selecione uma série', min_values: 1, max_values: 1, options }] }],
+    allowedMentions: { parse: [] } };
+}
+
+function actionGradeSelection(catalog, value) {
+  const files = actionFiles(catalog, value);
+  if (!files) return { flags: 64, content: 'Não foi possível encontrar esta seleção. Tente novamente.', allowedMentions: { parse: [] } };
+  const valid = files.filter(validFile);
+  const missing = 2 - valid.length;
+  const description = valid.length
+    ? 'Os arquivos disponíveis são manuais do professor. Acesse pelos botões abaixo.' + (missing ? `\n\n⚠️ ${missing} arquivo(s) ainda não estão disponíveis.` : '')
+    : 'Os arquivos desta seleção ainda não estão disponíveis. Tente novamente mais tarde.';
+  const result = { flags: 64, embeds: [{ color: COLOR, title: `SP em Ação • ${ACTION_GRADES[value].label}`, description }], allowedMentions: { parse: [] } };
+  if (valid.length) result.components = [{ type: 1, components: valid.map(file => ({ type: 2, style: 5, label: file.label.trim().slice(0, 80), url: file.url })) }];
+  return result;
+}
+
 function selection(catalog, customId, value) {
+  if (customId === IDS.actionGrade) return actionGradeSelection(catalog, value);
   const source = customId === IDS.grades ? GRADES : customId === IDS.action ? ACTION : null;
   const group = source && getGroup(catalog, value, source.map(x => x[0]));
   if (!group) return { flags: 64, content: 'Não foi possível encontrar esta seleção. Tente novamente.', allowedMentions: { parse: [] } };
@@ -61,4 +103,4 @@ function selection(catalog, customId, value) {
   if (valid.length) result.components = [{ type: 1, components: valid.map(file => ({ type: 2, style: 5, label: file.label.trim().slice(0, 80), url: file.url })) }];
   return result;
 }
-module.exports = { IDS, BUTTONS, MODALS, panel, choiceModal, gradeMenu, selection };
+module.exports = { IDS, BUTTONS, MODALS, panel, choiceModal, gradeMenu, actionGradeMenu, selection };

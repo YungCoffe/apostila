@@ -1,5 +1,5 @@
 'use strict';
-const { panel, selection, IDS, BUTTONS, MODALS, choiceModal, gradeMenu } = require('./ui');
+const { panel, selection, IDS, BUTTONS, MODALS, gradeMenu, actionGradeMenu } = require('./ui');
 
 // Dependencies are injected so interactions can be exercised offline.
 function makeHandler({ readCatalog, adminBit, log = console.error }) {
@@ -12,12 +12,10 @@ function makeHandler({ readCatalog, adminBit, log = console.error }) {
         return await interaction.reply(panel());
       }
       if (interaction.isButton?.() && Object.values(BUTTONS).includes(interaction.customId)) {
-        if (interaction.customId === BUTTONS.grades) {
-          await interaction.deferReply({ flags: 64 });
-          const { flags: _ephemeralAlreadySet, ...payload } = gradeMenu(readCatalog());
-          return await interaction.editReply(payload);
-        }
-        return await interaction.showModal(choiceModal(interaction.customId));
+        await interaction.deferReply({ flags: 64 });
+        const menu = interaction.customId === BUTTONS.grades ? gradeMenu : actionGradeMenu;
+        const { flags: _ephemeralAlreadySet, ...payload } = menu(readCatalog());
+        return await interaction.editReply(payload);
       }
       if (interaction.isModalSubmit?.() && Object.values(MODALS).includes(interaction.customId)) {
         const menuId = interaction.customId === MODALS.grades ? IDS.grades : IDS.action;
