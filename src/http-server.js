@@ -18,8 +18,8 @@ function startHttpServer(value = process.env.PORT) {
   const server = http.createServer((req, res) => {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.setHeader('Cache-Control', 'no-store');
-    if (req.method !== 'GET') {
-      res.setHeader('Allow', 'GET');
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
+      res.setHeader('Allow', 'GET, HEAD');
       res.writeHead(405);
       return res.end('{"error":"Método não permitido"}');
     }
@@ -27,10 +27,10 @@ function startHttpServer(value = process.env.PORT) {
     const pathname = (req.url || '').split('?')[0];
     if (pathname !== '/' && pathname !== '/health') {
       res.writeHead(404);
-      return res.end('{"error":"Não encontrado"}');
+      return res.end(req.method === 'HEAD' ? undefined : '{"error":"Não encontrado"}');
     }
     res.writeHead(200);
-    res.end('{"http":"disponível","discord":"não verificado"}');
+    res.end(req.method === 'HEAD' ? undefined : '{"http":"disponível","discord":"não verificado"}');
   });
 
   return new Promise((resolve, reject) => {

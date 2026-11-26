@@ -68,7 +68,7 @@ test('servidor usa a porta escolhida e escuta em todas as interfaces IPv4', asyn
   assert.deepEqual(JSON.parse(missing.body), { error: 'Não encontrado' });
   const post = await request(port, '/health', 'POST');
   assert.equal(post.status, 405);
-  assert.equal(post.headers.allow, 'GET');
+  assert.equal(post.headers.allow, 'GET, HEAD');
 });
 
 test('porta já ocupada rejeita com EADDRINUSE', async t => {

@@ -5,6 +5,7 @@ const { readCatalog } = require('./catalog');
 const { makeHandler, makePrefixHandler } = require('./handlers');
 const { getPort, startHttpServer } = require('./http-server');
 const { registerPanelCommand } = require('./auto-register');
+const { createSelfPing } = require('./self-ping');
 
 async function main() {
   if (!process.env.DISCORD_TOKEN) { console.error('DISCORD_TOKEN não configurado.'); process.exit(1); }
@@ -34,6 +35,7 @@ async function main() {
   });
   client.on(Events.InteractionCreate, makeHandler({ readCatalog, adminBit: PermissionFlagsBits.Administrator }));
   if (prefixEnabled) client.on(Events.MessageCreate, makePrefixHandler({ adminBit: PermissionFlagsBits.Administrator }));
+  createSelfPing().start();
   client.login(process.env.DISCORD_TOKEN).catch(() => { console.error('Não foi possível conectar ao Discord. Confira as credenciais e a rede.'); process.exit(1); });
 }
 
